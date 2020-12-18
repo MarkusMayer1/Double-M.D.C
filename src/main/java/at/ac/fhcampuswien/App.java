@@ -1,6 +1,8 @@
 package at.ac.fhcampuswien;
 
+import com.sun.javafx.scene.text.TextLayout;
 import javafx.application.*;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.*;
 import javafx.scene.control.*;
@@ -22,7 +24,12 @@ public class App extends Application {
         Scene scene = new Scene(root, 1600, 900);
 
         primaryStage.setScene(scene);
-
+        primaryStage.setResizable(false);
         primaryStage.show();
+
+
+
+
+
     }
 }
