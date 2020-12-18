@@ -1,6 +1,7 @@
 package at.ac.fhcampuswien;
 
 import javafx.application.*;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
@@ -12,14 +13,16 @@ public class App extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) {
-        primaryStage.setTitle("Hello World!");
-        Button btn = new Button();
-        btn.setText("Hello JavaFX!");
-        btn.setOnAction( (event) -> Platform.exit() );
-        Pane root = new StackPane();
-        root.getChildren().add(btn);
-        primaryStage.setScene(new Scene(root, 300, 150));
+    public void start(Stage primaryStage) throws Exception {
+
+
+        primaryStage.setTitle("Black Jack");
+
+        Parent root = FXMLLoader.load(this.getClass().getResource("/Table.fxml"));
+        Scene scene = new Scene(root, 1600, 900);
+
+        primaryStage.setScene(scene);
+
         primaryStage.show();
     }
 }
