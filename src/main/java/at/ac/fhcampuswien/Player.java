@@ -2,17 +2,22 @@ package at.ac.fhcampuswien;
 
 public class Player extends GamePerson{
 
-    private double budget = 100;
+    private double budget;
     private double einsatz = 1;
 
-    private Deck deck = getDeck();
+    public Player(double budget) {
+        this.budget = budget;
+    }
 
     public double getBudget() {
         return budget;
     }
 
+    public double getEinsatz() {
+        return einsatz;
+    }
 
-
-
-
+    public void setEinsatz(double einsatz) {
+        this.einsatz = einsatz;
+    }
 }

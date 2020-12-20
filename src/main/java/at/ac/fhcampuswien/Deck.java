@@ -3,67 +3,44 @@ package at.ac.fhcampuswien;
 import at.ac.fhcampuswien.Card.Suit;
 import at.ac.fhcampuswien.Card.Rank;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class Deck {
 
-    private Card[] deck = new Card[52];
+    private List<Card> deck = new ArrayList<>();
 
     public Deck(){
-
         createDeck();
         shuffleDeck();
     }
 
-
-
-    private void createDeck() {
-
-        int i = 0;
+    public void createDeck() {
         for (Suit suit: Suit.values()) {
             for (Rank rank: Rank.values()) {
-
-                deck[i++] = new Card(suit, rank);
+                deck.add(new Card(suit, rank));
             }
         }
     }
-    private void shuffleDeck() {
 
+    public void shuffleDeck() {
         Random rand = new Random();
         Card card;
         for(int i = 0; i < 5; i++){
-
-            for(int j = 0; j < deck.length; j++){
-
-                int number = rand.nextInt(deck.length);
-                card = deck[number];
-                deck[number] = deck[j];
-                deck[j] = card;
+            for(int j = 0; j < deck.size(); j++){
+                int number = rand.nextInt(deck.size());
+                card = deck.get(number);
+                deck.set(number, deck.get(j));
+                deck.set(j, card);
             }
         }
-
     }
 
     public Card Hit(){
-
-
-        Card card = null;
-        int i = 0;
-        while (card == null){
-
-            if(deck[i] == null){
-                i++;
-            }
-            else{
-                card = deck[i];
-
-            }
-
-        }
-        deck[i] = null;
+        Card card = deck.get(0);
+        deck.remove(0);
 
         return card;
     }
-
-
 }
