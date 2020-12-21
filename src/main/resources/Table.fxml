@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.ac.fhcampuswien.Controller">
 
@@ -55,12 +54,12 @@
             <Image url="@Karten/CardSkin.png" />
          </image>
       </ImageView>
-      <Button fx:id="Btn_Hit" layoutX="35.0" layoutY="630.0" mnemonicParsing="false" onMouseClicked="#Hit" prefHeight="110.0" prefWidth="243.0" text="HIT">
+      <Button fx:id="Btn_Hit" layoutX="35.0" layoutY="630.0" mnemonicParsing="false" onMouseClicked="#Hit" prefHeight="110.0" prefWidth="243.0" text="HIT" visible="false">
          <font>
             <Font size="55.0" />
          </font>
       </Button>
-      <Button layoutX="35.0" layoutY="755.0" mnemonicParsing="false" prefHeight="110.0" prefWidth="243.0" text="Stand">
+      <Button fx:id="Btn_Stand" layoutX="35.0" layoutY="755.0" mnemonicParsing="false" prefHeight="110.0" prefWidth="243.0" text="Stand" visible="false">
          <font>
             <Font size="55.0" />
          </font>
@@ -75,5 +74,10 @@
             <Font size="55.0" />
          </font>
       </Button>
+      <Label fx:id="playerHandValue" layoutX="770.0" layoutY="727.0" textFill="WHITE">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

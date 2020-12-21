@@ -2,6 +2,7 @@ package at.ac.fhcampuswien;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -29,12 +30,18 @@ public class Controller {
     ImageView imgV_player7;
     @FXML
     Button Btn_Start;
+    @FXML
+    Button Btn_Hit;
+    @FXML
+    Button Btn_Stand;
+    @FXML
+    Label playerHandValue;
 
     @FXML
     public void Hit(MouseEvent event) throws FileNotFoundException {
         if(event.getEventType() == MouseEvent.MOUSE_CLICKED){
             game.Hit();
-            drawPlayerCards();
+            drawPlayer();
         }
     }
 
@@ -42,12 +49,15 @@ public class Controller {
     public void Start(MouseEvent event) throws FileNotFoundException {
         if(event.getEventType() == MouseEvent.MOUSE_CLICKED){
             game.StartGame();
-            drawPlayerCards();
+            drawPlayer();
             Btn_Start.setVisible(false);
+            Btn_Hit.setVisible(true);
+            Btn_Stand.setVisible(true);
         }
     }
 
-    private void drawPlayerCards() throws FileNotFoundException {
+    private void drawPlayer() throws FileNotFoundException {
+        playerHandValue.setText(Integer.toString(game.getP().getGameHand().HandValue()));
         int index = 1;
         for (Card card: game.getP().GameHand.getHand()) {
             switch (index) {

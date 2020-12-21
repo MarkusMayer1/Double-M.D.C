@@ -9,10 +9,6 @@ public class Player extends GamePerson{
         this.budget = budget;
     }
 
-    public double getBudget() {
-        return budget;
-    }
-
     public double getEinsatz() {
         return einsatz;
     }
