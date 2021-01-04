@@ -25,11 +25,12 @@ public class Hand {
             }
         }
         for (Card card : hand) {
+            summe = summe + card.value;
             if (summe > 21 && aces > 0) {
                 summe = summe - 10;
                 aces--;
             }
-            summe = summe + card.value;
+
         }
 
         return summe;

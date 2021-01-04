@@ -8,7 +8,7 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.ac.fhcampuswien.Controller">
 
    <children>
-      <ImageView fx:id="tableImage" fitHeight="908.0" fitWidth="1600.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="tableImage" fitHeight="908.0" fitWidth="1600.0" layoutX="-7.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@172-1722358_transparent-card-dealer-clipart-blackjack-table-png.png" />
          </image></ImageView>
@@ -19,57 +19,24 @@
       <ImageView fx:id="imgV_player5" fitHeight="121.0" fitWidth="80.0" layoutX="800.0" layoutY="559.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="imgV_player6" fitHeight="121.0" fitWidth="80.0" layoutX="840.0" layoutY="559.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="imgV_player7" fitHeight="121.0" fitWidth="80.0" layoutX="880.0" layoutY="559.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fitHeight="121.0" fitWidth="80.0" layoutX="880.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@Karten/CardSkin.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="121.0" fitWidth="80.0" layoutX="840.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@Karten/CardSkin.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="121.0" fitWidth="80.0" layoutX="800.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@Karten/CardSkin.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="121.0" fitWidth="80.0" layoutX="760.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@Karten/CardSkin.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="121.0" fitWidth="80.0" layoutX="720.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@Karten/Herz-Bube.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="121.0" fitWidth="80.0" layoutX="680.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@Karten/CardSkin.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="121.0" fitWidth="80.0" layoutX="640.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@Karten/CardSkin.png" />
-         </image>
-      </ImageView>
+      <ImageView fx:id="imgV_dealer1" fitHeight="121.0" fitWidth="80.0" layoutX="880.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="imgV_dealer2" fitHeight="121.0" fitWidth="80.0" layoutX="840.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="imgV_dealer3" fitHeight="121.0" fitWidth="80.0" layoutX="800.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="imgV_dealer4" fitHeight="121.0" fitWidth="80.0" layoutX="760.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="imgV_dealer5" fitHeight="121.0" fitWidth="80.0" layoutX="720.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="imgV_dealer6" fitHeight="121.0" fitWidth="80.0" layoutX="680.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="imgV_dealer7" fitHeight="121.0" fitWidth="80.0" layoutX="640.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true" />
       <Button fx:id="Btn_Hit" layoutX="35.0" layoutY="630.0" mnemonicParsing="false" onMouseClicked="#Hit" prefHeight="110.0" prefWidth="243.0" text="HIT" visible="false">
          <font>
             <Font size="55.0" />
          </font>
       </Button>
-      <Button fx:id="Btn_Stand" layoutX="35.0" layoutY="755.0" mnemonicParsing="false" prefHeight="110.0" prefWidth="243.0" text="Stand" visible="false">
+      <Button fx:id="Btn_Stand" layoutX="35.0" layoutY="755.0" mnemonicParsing="false" onMouseClicked="#Stand" prefHeight="110.0" prefWidth="243.0" text="Stand" visible="false">
          <font>
             <Font size="55.0" />
          </font>
       </Button>
-      <Button layoutX="1275.0" layoutY="749.0" mnemonicParsing="false" prefHeight="119.0" prefWidth="274.0" text="Double">
-         <font>
-            <Font size="55.0" />
-         </font>
-      </Button>
-      <Button fx:id="Btn_Start" layoutX="200.0" layoutY="120.0" mnemonicParsing="false" onMouseClicked="#Start" prefHeight="110.0" prefWidth="243.0" text="Start">
+      <Button fx:id="Btn_Double" layoutX="1275.0" layoutY="749.0" mnemonicParsing="false" onMouseClicked="#Double" prefHeight="119.0" prefWidth="274.0" text="Double" visible="false">
          <font>
             <Font size="55.0" />
          </font>
@@ -77,6 +44,31 @@
       <Label fx:id="playerHandValue" layoutX="770.0" layoutY="727.0" textFill="WHITE">
          <font>
             <Font size="30.0" />
+         </font>
+      </Label>
+      <Label fx:id="WinMessage" alignment="CENTER" layoutX="335.0" layoutY="235.0" prefHeight="318.0" prefWidth="915.0" style="-fx-background-color: #095807; -fx-background-radius: 25;" textFill="WHITE" visible="false">
+         <font>
+            <Font size="100.0" />
+         </font>
+      </Label>
+      <Button fx:id="Btn_Start" layoutX="200.0" layoutY="120.0" mnemonicParsing="false" onMouseClicked="#Start" prefHeight="110.0" prefWidth="243.0" text="Start">
+         <font>
+            <Font size="55.0" />
+         </font>
+      </Button>
+      <Label fx:id="dealerHandValue" layoutX="770.0" layoutY="65.0" textFill="WHITE">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <Label fx:id="Budget" layoutX="500.0" layoutY="559.0" textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="Bet" layoutX="500.0" layoutY="597.0" textFill="WHITE">
+         <font>
+            <Font size="20.0" />
          </font>
       </Label>
    </children>

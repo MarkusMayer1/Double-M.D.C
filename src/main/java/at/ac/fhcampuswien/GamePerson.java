@@ -2,7 +2,7 @@ package at.ac.fhcampuswien;
 
 public class GamePerson {
 
-    private double budget;
+
     public Hand GameHand;
 
     public GamePerson() {
@@ -17,11 +17,10 @@ public class GamePerson {
         return GameHand;
     }
 
-    public double getBudget() {
-        return budget;
+    public void reset() {
+
+        GameHand = new Hand();
     }
 
-    public void setBudget(double budget) {
-        this.budget = budget;
-    }
+
 }
