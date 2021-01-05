@@ -122,11 +122,10 @@ public class Controller {
     }
 
     @FXML
-    public void Stand(MouseEvent event) throws FileNotFoundException {
+    public void Stand(MouseEvent event) throws FileNotFoundException, InterruptedException {
         if(event.getEventType() == MouseEvent.MOUSE_CLICKED){
           game.Stand();
           drawDealer();
-
           WinGame();
 
         }
