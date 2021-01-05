@@ -25,16 +25,26 @@ public class Game {
         p.getCard(deck);
     }
 
-    public void Stand() {
+    // Dealer zieht nach der Methode Karten
+    public void dealersTurn() {
         d.drawCards();
     }
 
     public String checkWin(){
-        if((p.getGameHand().HandValue() > d.getGameHand().HandValue() && p.getGameHand().HandValue() <= 21) || (d.getGameHand().HandValue() > 21 && p.getGameHand().HandValue() <= 21)){
-
-            p.setBudget(p.getBudget()+ p.getEinsatz()*2);
+        if (p.getGameHand().HandValue() == 21 && p.getGameHand().getHand().size() == 2 && d.getGameHand().HandValue() == 21 && d.getGameHand().getHand().size() != 2) {
+            p.setBudget(p.getBudget()+ p.getEinsatz()*2.5);
             return "The Player won";
-
+        }
+        else if (p.getGameHand().HandValue() == 21 && p.getGameHand().getHand().size() != 2 && d.getGameHand().HandValue() == 21 && d.getGameHand().getHand().size() == 2) {
+            return "The Dealer won";
+        }
+        else if((p.getGameHand().HandValue() > d.getGameHand().HandValue() && p.getGameHand().HandValue() <= 21) || (d.getGameHand().HandValue() > 21 && p.getGameHand().HandValue() <= 21)){
+            if (p.getGameHand().HandValue() == 21 && p.getGameHand().getHand().size() == 2) {
+                p.setBudget(p.getBudget()+ p.getEinsatz()*2.5);
+            } else {
+                p.setBudget(p.getBudget()+ p.getEinsatz()*2);
+            }
+            return "The Player won";
         }
         else if((p.getGameHand().HandValue() < d.getGameHand().HandValue() && d.getGameHand().HandValue() <= 21) || (p.getGameHand().HandValue() > 21 && d.getGameHand().HandValue() <= 21)){
 

@@ -1,14 +1,10 @@
 package at.ac.fhcampuswien;
 
-import com.sun.javafx.scene.text.TextLayout;
 import javafx.application.*;
 import javafx.event.EventHandler;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.*;
-import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.*;
 

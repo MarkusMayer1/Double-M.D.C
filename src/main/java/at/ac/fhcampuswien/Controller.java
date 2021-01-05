@@ -1,11 +1,13 @@
 package at.ac.fhcampuswien;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -61,26 +63,30 @@ public class Controller {
     @FXML
     Label Bet;
 
-    public void WinGame(){
+    public void WinGame() {
         WinMessage.setText(game.checkWin());
         WinMessage.setVisible(true);
         Btn_Hit.setDisable(true);
         Btn_Stand.setDisable(true);
         Btn_Double.setDisable(true);
         Btn_Start.setVisible(true);
+        dealerHandValue.setVisible(true);
     }
 
     @FXML
-    public void Hit(MouseEvent event) throws FileNotFoundException {
+    public void exit(MouseEvent event) {
+        if (event.getEventType() == MouseEvent.MOUSE_CLICKED) {
+            Platform.exit();
+        }
+    }
 
-
-        if(event.getEventType() == MouseEvent.MOUSE_CLICKED){
+    @FXML
+    public void Hit(MouseEvent event) {
+        if (event.getEventType() == MouseEvent.MOUSE_CLICKED) {
             game.Hit();
             drawPlayer();
-            if(game.getP().getGameHand().HandValue() >= 21){
-
-
-                game.Stand();
+            if (game.getP().getGameHand().HandValue() >= 21) {
+                game.dealersTurn();
                 drawDealer();
                 WinGame();
             }
@@ -88,71 +94,58 @@ public class Controller {
     }
 
     @FXML
-    public void Start(MouseEvent event) throws FileNotFoundException {
-        if(event.getEventType() == MouseEvent.MOUSE_CLICKED){
+    public void Start(MouseEvent event) {
+        if (event.getEventType() == MouseEvent.MOUSE_CLICKED) {
             restart();
-            if(game.getP().getBudget() <= 0){
-
+            if (game.getP().getBudget() <= 5) {
                 endscreen();
-
-            }
-            else{
-
+            } else {
                 game.StartGame(game.getP().getBudget());
                 game.getP().setBudget(game.getP().getBudget() - game.getP().getEinsatz());
-                Budget.setText("Budget: "+game.getP().getBudget());
-                Bet.setText("Bet: "+game.getP().getEinsatz());
+                Budget.setText("Budget: " + game.getP().getBudget());
+                Bet.setText("Bet: " + game.getP().getEinsatz());
                 drawPlayer();
                 drawDealer();
+                dealerHandValue.setVisible(false);
                 Btn_Start.setVisible(false);
                 Btn_Hit.setVisible(true);
                 Btn_Stand.setVisible(true);
                 Btn_Double.setVisible(true);
-                if(game.getP().getBudget() < game.getP().getEinsatz()) {
-
-
+                if (game.getP().getBudget() < game.getP().getEinsatz()) {
                     Btn_Double.setDisable(true);
-
-
                 }
             }
-
-
         }
     }
 
     @FXML
-    public void Stand(MouseEvent event) throws FileNotFoundException, InterruptedException {
-        if(event.getEventType() == MouseEvent.MOUSE_CLICKED){
-          game.Stand();
-          drawDealer();
-          WinGame();
-
+    public void Stand(MouseEvent event) {
+        if (event.getEventType() == MouseEvent.MOUSE_CLICKED) {
+            game.dealersTurn();
+            drawDealer();
+            WinGame();
         }
     }
-    public void Double(MouseEvent event) throws FileNotFoundException {
-        if(event.getEventType() == MouseEvent.MOUSE_CLICKED){
 
-
+    @FXML
+    public void Double(MouseEvent event) {
+        if (event.getEventType() == MouseEvent.MOUSE_CLICKED) {
             game.Hit();
             drawPlayer();
             game.getP().setBudget(game.getP().getBudget() - game.getP().getEinsatz());
-            game.getP().setEinsatz(game.getP().getEinsatz()*2);
-            Budget.setText("Budget: "+game.getP().getBudget());
-            Bet.setText("Bet: "+game.getP().getEinsatz());
+            game.getP().setEinsatz(game.getP().getEinsatz() * 2);
+            Budget.setText("Budget: " + game.getP().getBudget());
+            Bet.setText("Bet: " + game.getP().getEinsatz());
 
-            game.Stand();
+            game.dealersTurn();
             drawDealer();
 
             WinGame();
-            game.getP().setEinsatz(game.getP().getEinsatz()/2);
-
-
+            game.getP().setEinsatz(game.getP().getEinsatz() / 2);
         }
     }
 
-    public void restart(){
-
+    public void restart() {
         Btn_Hit.setDisable(false);
         Btn_Stand.setDisable(false);
         Btn_Double.setDisable(false);
@@ -173,11 +166,9 @@ public class Controller {
         imgV_dealer5.setImage(null);
         imgV_dealer6.setImage(null);
         imgV_dealer7.setImage(null);
-
-
     }
 
-    public void endscreen(){
+    public void endscreen() {
         Btn_Hit.setDisable(true);
         Btn_Stand.setDisable(true);
         Btn_Double.setDisable(true);
@@ -203,98 +194,105 @@ public class Controller {
         imgV_dealer5.setImage(null);
         imgV_dealer6.setImage(null);
         imgV_dealer7.setImage(null);
-
-
     }
 
-    private void drawPlayer() throws FileNotFoundException {
+    //Anzeigen der Bilder in den ImageViews
+    private void drawPlayer() {
         playerHandValue.setText(Integer.toString(game.getP().getGameHand().HandValue()));
         int index = 1;
-        for (Card card: game.getP().GameHand.getHand()) {
-            switch (index) {
-                case 1:
-                    InputStream stream1 = new FileInputStream("src/main/resources/Karten/"+card.toString());
-                    Image image1 = new Image(stream1);
-                    imgV_player1.setImage(image1);
-                    break;
-                case 2:
-                    InputStream stream2 = new FileInputStream("src/main/resources/Karten/"+card.toString());
-                    Image image2 = new Image(stream2);
-                    imgV_player2.setImage(image2);
-                    break;
-                case 3:
-                    InputStream stream3 = new FileInputStream("src/main/resources/Karten/"+card.toString());
-                    Image image3 = new Image(stream3);
-                    imgV_player3.setImage(image3);
-                    break;
-                case 4:
-                    InputStream stream4 = new FileInputStream("src/main/resources/Karten/"+card.toString());
-                    Image image4 = new Image(stream4);
-                    imgV_player4.setImage(image4);
-                    break;
-                case 5:
-                    InputStream stream5 = new FileInputStream("src/main/resources/Karten/"+card.toString());
-                    Image image5 = new Image(stream5);
-                    imgV_player5.setImage(image5);
-                    break;
-                case 6:
-                    InputStream stream6 = new FileInputStream("src/main/resources/Karten/"+card.toString());
-                    Image image6 = new Image(stream6);
-                    imgV_player6.setImage(image6);
-                    break;
-                case 7:
-                    InputStream stream7 = new FileInputStream("src/main/resources/Karten/"+card.toString());
-                    Image image7 = new Image(stream7);
-                    imgV_player7.setImage(image7);
-                    break;
+        try {
+            for (Card card : game.getP().GameHand.getHand()) {
+                switch (index) {
+                    case 1:
+                        InputStream stream1 = new FileInputStream("src/main/resources/Karten/" + card.toString());
+                        Image image1 = new Image(stream1);
+                        imgV_player1.setImage(image1);
+                        break;
+                    case 2:
+                        InputStream stream2 = new FileInputStream("src/main/resources/Karten/" + card.toString());
+                        Image image2 = new Image(stream2);
+                        imgV_player2.setImage(image2);
+                        break;
+                    case 3:
+                        InputStream stream3 = new FileInputStream("src/main/resources/Karten/" + card.toString());
+                        Image image3 = new Image(stream3);
+                        imgV_player3.setImage(image3);
+                        break;
+                    case 4:
+                        InputStream stream4 = new FileInputStream("src/main/resources/Karten/" + card.toString());
+                        Image image4 = new Image(stream4);
+                        imgV_player4.setImage(image4);
+                        break;
+                    case 5:
+                        InputStream stream5 = new FileInputStream("src/main/resources/Karten/" + card.toString());
+                        Image image5 = new Image(stream5);
+                        imgV_player5.setImage(image5);
+                        break;
+                    case 6:
+                        InputStream stream6 = new FileInputStream("src/main/resources/Karten/" + card.toString());
+                        Image image6 = new Image(stream6);
+                        imgV_player6.setImage(image6);
+                        break;
+                    case 7:
+                        InputStream stream7 = new FileInputStream("src/main/resources/Karten/" + card.toString());
+                        Image image7 = new Image(stream7);
+                        imgV_player7.setImage(image7);
+                        break;
+                }
+                index++;
             }
-            index++;
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
         }
     }
 
-    private void drawDealer() throws FileNotFoundException {
+    //Anzeigen der Bilder in den ImageViews
+    private void drawDealer() {
         dealerHandValue.setText(Integer.toString(game.getD().getGameHand().HandValue()));
         int index = 1;
-        for (Card card: game.getD().GameHand.getHand()) {
-            switch (index) {
-                case 1:
-                    InputStream stream1 = new FileInputStream("src/main/resources/Karten/"+card.toString());
-                    Image image1 = new Image(stream1);
-                    imgV_dealer1.setImage(image1);
-                    break;
-                case 2:
-                    InputStream stream2 = new FileInputStream("src/main/resources/Karten/"+card.toString());
-                    Image image2 = new Image(stream2);
-                    imgV_dealer2.setImage(image2);
-                    break;
-                case 3:
-                    InputStream stream3 = new FileInputStream("src/main/resources/Karten/"+card.toString());
-                    Image image3 = new Image(stream3);
-                    imgV_dealer3.setImage(image3);
-                    break;
-                case 4:
-                    InputStream stream4 = new FileInputStream("src/main/resources/Karten/"+card.toString());
-                    Image image4 = new Image(stream4);
-                    imgV_dealer4.setImage(image4);
-                    break;
-                case 5:
-                    InputStream stream5 = new FileInputStream("src/main/resources/Karten/"+card.toString());
-                    Image image5 = new Image(stream5);
-                    imgV_dealer5.setImage(image5);
-                    break;
-                case 6:
-                    InputStream stream6 = new FileInputStream("src/main/resources/Karten/"+card.toString());
-                    Image image6 = new Image(stream6);
-                    imgV_dealer6.setImage(image6);
-                    break;
-                case 7:
-                    InputStream stream7 = new FileInputStream("src/main/resources/Karten/"+card.toString());
-                    Image image7 = new Image(stream7);
-                    imgV_dealer7.setImage(image7);
-                    break;
+        try {
+            for (Card card : game.getD().GameHand.getHand()) {
+                switch (index) {
+                    case 1:
+                        InputStream stream1 = new FileInputStream("src/main/resources/Karten/" + card.toString());
+                        Image image1 = new Image(stream1);
+                        imgV_dealer1.setImage(image1);
+                        break;
+                    case 2:
+                        InputStream stream2 = new FileInputStream("src/main/resources/Karten/" + card.toString());
+                        Image image2 = new Image(stream2);
+                        imgV_dealer2.setImage(image2);
+                        break;
+                    case 3:
+                        InputStream stream3 = new FileInputStream("src/main/resources/Karten/" + card.toString());
+                        Image image3 = new Image(stream3);
+                        imgV_dealer3.setImage(image3);
+                        break;
+                    case 4:
+                        InputStream stream4 = new FileInputStream("src/main/resources/Karten/" + card.toString());
+                        Image image4 = new Image(stream4);
+                        imgV_dealer4.setImage(image4);
+                        break;
+                    case 5:
+                        InputStream stream5 = new FileInputStream("src/main/resources/Karten/" + card.toString());
+                        Image image5 = new Image(stream5);
+                        imgV_dealer5.setImage(image5);
+                        break;
+                    case 6:
+                        InputStream stream6 = new FileInputStream("src/main/resources/Karten/" + card.toString());
+                        Image image6 = new Image(stream6);
+                        imgV_dealer6.setImage(image6);
+                        break;
+                    case 7:
+                        InputStream stream7 = new FileInputStream("src/main/resources/Karten/" + card.toString());
+                        Image image7 = new Image(stream7);
+                        imgV_dealer7.setImage(image7);
+                        break;
+                }
+                index++;
             }
-            index++;
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
         }
     }
-
 }
