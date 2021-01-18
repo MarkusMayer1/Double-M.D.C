@@ -9,7 +9,7 @@ public class Dealer extends GamePerson {
     }
 
     public void drawCards(){
-       while (getGameHand().HandValue() < 17){
+       while (getGameHand().handValue() < 17){
            getCard(deck);
        }
    }

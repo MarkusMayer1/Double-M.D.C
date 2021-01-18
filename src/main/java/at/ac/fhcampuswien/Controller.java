@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Font;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -31,13 +32,13 @@ public class Controller {
     @FXML
     ImageView imgV_player7;
     @FXML
-    Button Btn_Start;
+    Button btn_Start;
     @FXML
-    Button Btn_Hit;
+    Button btn_Hit;
     @FXML
-    Button Btn_Stand;
+    Button btn_Stand;
     @FXML
-    Button Btn_Double;
+    Button btn_Double;
     @FXML
     Label playerHandValue;
     @FXML
@@ -57,19 +58,19 @@ public class Controller {
     @FXML
     ImageView imgV_dealer7;
     @FXML
-    Label WinMessage;
+    Label winMessage;
     @FXML
-    Label Budget;
+    Label budget;
     @FXML
-    Label Bet;
+    Label bet;
 
-    public void WinGame() {
-        WinMessage.setText(game.checkWin());
-        WinMessage.setVisible(true);
-        Btn_Hit.setDisable(true);
-        Btn_Stand.setDisable(true);
-        Btn_Double.setDisable(true);
-        Btn_Start.setVisible(true);
+    public void winGame() {
+        winMessage.setText(game.checkWin());
+        winMessage.setVisible(true);
+        btn_Hit.setDisable(true);
+        btn_Stand.setDisable(true);
+        btn_Double.setDisable(true);
+        btn_Start.setVisible(true);
         dealerHandValue.setVisible(true);
     }
 
@@ -81,75 +82,97 @@ public class Controller {
     }
 
     @FXML
-    public void Hit(MouseEvent event) {
+    public void hit(MouseEvent event) {
         if (event.getEventType() == MouseEvent.MOUSE_CLICKED) {
-            game.Hit();
+            game.hit();
             drawPlayer();
-            if (game.getP().getGameHand().HandValue() >= 21) {
+            if (game.getP().getGameHand().handValue() == 21) {
                 game.dealersTurn();
                 drawDealer();
-                WinGame();
+                winGame();
+            }
+            else if(game.getP().getGameHand().handValue() > 21){
+
+                game.getD().getCard(game.getDeck());
+                drawDealer();
+                winGame();
+            }
+            else if(game.getP().getGameHand().getHand().size() == 7){
+                game.getD().getCard(game.getDeck());
+                drawDealer();
+                winGame();
             }
         }
     }
 
     @FXML
-    public void Start(MouseEvent event) {
+    public void start(MouseEvent event) {
         if (event.getEventType() == MouseEvent.MOUSE_CLICKED) {
             restart();
             if (game.getP().getBudget() <= 5) {
                 endscreen();
             } else {
-                game.StartGame(game.getP().getBudget());
-                game.getP().setBudget(game.getP().getBudget() - game.getP().getEinsatz());
-                Budget.setText("Budget: " + game.getP().getBudget());
-                Bet.setText("Bet: " + game.getP().getEinsatz());
+                game.startGame();
+                try{
+                    InputStream stream = new FileInputStream("src/main/resources/Karten/CardSkin.png");
+                    Image image = new Image(stream);
+                    imgV_dealer2.setImage(image);
+                }catch (FileNotFoundException e){
+                    e.printStackTrace();
+                }
+
+
+                game.getP().setBudget(game.getP().getBudget() - game.getP().getBet());
+                budget.setText("Budget: " + game.getP().getBudget());
+                bet.setText("Bet: " + game.getP().getBet());
                 drawPlayer();
                 drawDealer();
                 dealerHandValue.setVisible(false);
-                Btn_Start.setVisible(false);
-                Btn_Hit.setVisible(true);
-                Btn_Stand.setVisible(true);
-                Btn_Double.setVisible(true);
-                if (game.getP().getBudget() < game.getP().getEinsatz()) {
-                    Btn_Double.setDisable(true);
+                btn_Start.setVisible(false);
+                btn_Start.setText("Next Round");
+                btn_Start.setFont(Font.font(36));
+                btn_Hit.setVisible(true);
+                btn_Stand.setVisible(true);
+                btn_Double.setVisible(true);
+                if (game.getP().getBudget() < game.getP().getBet()) {
+                    btn_Double.setDisable(true);
                 }
             }
         }
     }
 
     @FXML
-    public void Stand(MouseEvent event) {
+    public void stand(MouseEvent event) {
         if (event.getEventType() == MouseEvent.MOUSE_CLICKED) {
             game.dealersTurn();
             drawDealer();
-            WinGame();
+            winGame();
         }
     }
 
     @FXML
-    public void Double(MouseEvent event) {
+    public void doubleBet(MouseEvent event) {
         if (event.getEventType() == MouseEvent.MOUSE_CLICKED) {
-            game.Hit();
+            game.hit();
             drawPlayer();
-            game.getP().setBudget(game.getP().getBudget() - game.getP().getEinsatz());
-            game.getP().setEinsatz(game.getP().getEinsatz() * 2);
-            Budget.setText("Budget: " + game.getP().getBudget());
-            Bet.setText("Bet: " + game.getP().getEinsatz());
+            game.getP().setBudget(game.getP().getBudget() - game.getP().getBet());
+            game.getP().setBet(game.getP().getBet() * 2);
+            budget.setText("Budget: " + game.getP().getBudget());
+            bet.setText("Bet: " + game.getP().getBet());
 
             game.dealersTurn();
             drawDealer();
 
-            WinGame();
-            game.getP().setEinsatz(game.getP().getEinsatz() / 2);
+            winGame();
+            game.getP().setBet(game.getP().getBet() / 2);
         }
     }
 
     public void restart() {
-        Btn_Hit.setDisable(false);
-        Btn_Stand.setDisable(false);
-        Btn_Double.setDisable(false);
-        WinMessage.setVisible(false);
+        btn_Hit.setDisable(false);
+        btn_Stand.setDisable(false);
+        btn_Double.setDisable(false);
+        winMessage.setVisible(false);
 
         imgV_player1.setImage(null);
         imgV_player2.setImage(null);
@@ -169,12 +192,12 @@ public class Controller {
     }
 
     public void endscreen() {
-        Btn_Hit.setDisable(true);
-        Btn_Stand.setDisable(true);
-        Btn_Double.setDisable(true);
-        WinMessage.setText("No Money left");
-        WinMessage.setVisible(true);
-        Btn_Start.setDisable(true);
+        btn_Hit.setDisable(true);
+        btn_Stand.setDisable(true);
+        btn_Double.setDisable(true);
+        winMessage.setText("No Money left");
+        winMessage.setVisible(true);
+        btn_Start.setDisable(true);
 
         playerHandValue.setVisible(false);
         dealerHandValue.setVisible(false);
@@ -198,7 +221,7 @@ public class Controller {
 
     //Anzeigen der Bilder in den ImageViews
     private void drawPlayer() {
-        playerHandValue.setText(Integer.toString(game.getP().getGameHand().HandValue()));
+        playerHandValue.setText(Integer.toString(game.getP().getGameHand().handValue()));
         int index = 1;
         try {
             for (Card card : game.getP().GameHand.getHand()) {
@@ -248,7 +271,7 @@ public class Controller {
 
     //Anzeigen der Bilder in den ImageViews
     private void drawDealer() {
-        dealerHandValue.setText(Integer.toString(game.getD().getGameHand().HandValue()));
+        dealerHandValue.setText(Integer.toString(game.getD().getGameHand().handValue()));
         int index = 1;
         try {
             for (Card card : game.getD().GameHand.getHand()) {

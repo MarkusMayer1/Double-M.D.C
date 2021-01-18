@@ -1,8 +1,6 @@
 package at.ac.fhcampuswien;
 
-import javafx.scene.Parent;
-
-public class Card extends Parent {
+public class Card {
 
     enum Suit {
         Herz,

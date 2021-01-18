@@ -12,12 +12,12 @@ public class Hand {
     }
 
     public void addCard(Deck deck){
-        hand.add(deck.Hit());
+        hand.add(deck.hit());
     }
 
-    public int HandValue(){
+    public int handValue(){
         int aces = 0;
-        int summe = 0;
+        int sum = 0;
 
         for (Card card : hand) {
             if (card.rank == Card.Rank.Ass) {
@@ -25,15 +25,15 @@ public class Hand {
             }
         }
         for (Card card : hand) {
-            summe = summe + card.value;
-            if (summe > 21 && aces > 0) {
-                summe = summe - 10;
+            sum = sum + card.value;
+            if (sum > 21 && aces > 0) {
+                sum = sum - 10;
                 aces--;
             }
 
         }
 
-        return summe;
+        return sum;
     }
 
     public List<Card> getHand() {

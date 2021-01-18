@@ -32,7 +32,7 @@
       <ImageView fx:id="imgV_dealer5" fitHeight="121.0" fitWidth="80.0" layoutX="720.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="imgV_dealer6" fitHeight="121.0" fitWidth="80.0" layoutX="680.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="imgV_dealer7" fitHeight="121.0" fitWidth="80.0" layoutX="640.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true" />
-      <Button fx:id="Btn_Hit" layoutX="760.0" layoutY="479.0" mnemonicParsing="false" onMouseClicked="#Hit" prefHeight="70.0" prefWidth="80.0" style="-fx-background-radius: 100; -fx-background-color: #ffffff;" text="HIT" visible="false">
+      <Button fx:id="btn_Hit" layoutX="760.0" layoutY="479.0" mnemonicParsing="false" onMouseClicked="#hit" prefHeight="70.0" prefWidth="80.0" style="-fx-background-radius: 100; -fx-background-color: #ffffff;" text="HIT" visible="false">
          <font>
             <Font size="28.0" />
          </font>
@@ -40,7 +40,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="Btn_Stand" layoutX="610.0" layoutY="479.0" mnemonicParsing="false" onMouseClicked="#Stand" prefHeight="70.0" prefWidth="140.0" style="-fx-background-radius: 100; -fx-background-color: #ffffff;" text="Stand" visible="false">
+      <Button fx:id="btn_Stand" layoutX="610.0" layoutY="479.0" mnemonicParsing="false" onMouseClicked="#stand" prefHeight="70.0" prefWidth="140.0" style="-fx-background-radius: 100; -fx-background-color: #ffffff;" text="Stand" visible="false">
          <font>
             <Font size="28.0" />
          </font>
@@ -48,7 +48,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="Btn_Double" layoutX="850.0" layoutY="479.0" mnemonicParsing="false" onMouseClicked="#Double" prefHeight="70.0" prefWidth="140.0" style="-fx-background-radius: 100; -fx-background-color: #ffffff;" text="Double" visible="false">
+      <Button fx:id="btn_Double" layoutX="850.0" layoutY="479.0" mnemonicParsing="false" onMouseClicked="#doubleBet" prefHeight="70.0" prefWidth="140.0" style="-fx-background-radius: 100; -fx-background-color: #ffffff;" text="Double" visible="false">
          <font>
             <Font size="28.0" />
          </font>
@@ -61,12 +61,12 @@
             <Font size="30.0" />
          </font>
       </Label>
-      <Label fx:id="WinMessage" alignment="CENTER" layoutX="335.0" layoutY="235.0" prefHeight="318.0" prefWidth="915.0" style="-fx-background-color: #095807; -fx-background-radius: 25;" textFill="WHITE" visible="false">
+      <Label fx:id="winMessage" alignment="CENTER" layoutX="335.0" layoutY="235.0" prefHeight="318.0" prefWidth="915.0" style="-fx-background-color: #095807; -fx-background-radius: 25;" textFill="WHITE" visible="false">
          <font>
             <Font size="100.0" />
          </font>
       </Label>
-      <Button fx:id="Btn_Start" layoutX="187.0" layoutY="121.0" mnemonicParsing="false" onMouseClicked="#Start" prefHeight="110.0" prefWidth="243.0" style="-fx-background-radius: 25;" text="Start">
+      <Button fx:id="btn_Start" layoutX="187.0" layoutY="121.0" mnemonicParsing="false" onMouseClicked="#start" prefHeight="110.0" prefWidth="243.0" style="-fx-background-radius: 25;" text="Start">
          <font>
             <Font size="55.0" />
          </font>
@@ -96,12 +96,12 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
-      <Label fx:id="Budget" layoutX="500.0" layoutY="559.0" textFill="WHITE">
+      <Label fx:id="budget" layoutX="500.0" layoutY="559.0" textFill="WHITE">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <Label fx:id="Bet" layoutX="500.0" layoutY="597.0" textFill="WHITE">
+      <Label fx:id="bet" layoutX="500.0" layoutY="597.0" textFill="WHITE">
          <font>
             <Font size="20.0" />
          </font>

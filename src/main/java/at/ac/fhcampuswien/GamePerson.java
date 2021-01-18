@@ -1,6 +1,6 @@
 package at.ac.fhcampuswien;
 
-public class GamePerson {
+public abstract class GamePerson {
 
 
     public Hand GameHand;

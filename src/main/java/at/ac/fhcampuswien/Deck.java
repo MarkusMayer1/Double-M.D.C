@@ -22,12 +22,14 @@ public class Deck {
                 deck.add(new Card(suit, rank));
             }
         }
+
+
     }
 
     public void shuffleDeck() {
         Random rand = new Random();
         Card card;
-        for(int i = 0; i < 5; i++){
+        for(int i = 0; i < 5; i++){   //Deck wird 5 mal gemischt
             for(int j = 0; j < deck.size(); j++){
                 int number = rand.nextInt(deck.size());
                 card = deck.get(number);
@@ -37,7 +39,7 @@ public class Deck {
         }
     }
 
-    public Card Hit(){
+    public Card hit(){
         Card card = deck.get(0);
         deck.remove(0);
 

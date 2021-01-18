@@ -2,15 +2,18 @@ package at.ac.fhcampuswien;
 
 public class Player extends GamePerson{
 
-    private double budget = 100;
-    private double einsatz = 10;
+
+
+
+    private double budget;
+    private double bet = 10;
 
     public Player(double budget) {
         this.budget = budget;
     }
 
-    public double getEinsatz() {
-        return einsatz;
+    public double getBet() {
+        return bet;
     }
 
     public double getBudget() {
@@ -21,7 +24,7 @@ public class Player extends GamePerson{
         this.budget = budget;
     }
 
-    public void setEinsatz(double einsatz) {
-        this.einsatz = einsatz;
+    public void setBet(double bet) {
+        this.bet = bet;
     }
 }
