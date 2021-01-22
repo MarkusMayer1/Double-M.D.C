@@ -2,6 +2,16 @@ package at.ac.fhcampuswien;
 
 public class Card {
 
+    public Suit suit;
+    public Rank rank;
+    public int value;
+
+    public Card(Suit suit, Rank rank) {
+        this.suit = suit;
+        this.rank = rank;
+        this.value = rank.value;
+    }
+
     enum Suit {
         Herz,
         Karo,
@@ -25,25 +35,14 @@ public class Card {
         Ass(11);
 
         int value;
-        Rank(int value){
+
+        Rank(int value) {
             this.value = value;
         }
     };
 
-    public Suit suit;
-    public Rank rank;
-    public int value;
-
-    public Card(Suit suit, Rank rank) {
-        this.suit = suit;
-        this.rank = rank;
-        this.value = rank.value;
-
-
-    }
-
     @Override
-    public String toString(){
+    public String toString() {
         return suit.toString() + "-" + rank.toString() + ".png";
     }
 }

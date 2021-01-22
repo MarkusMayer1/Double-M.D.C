@@ -6,7 +6,6 @@ public class Game {
     private Player p = new Player(100);
     private Dealer d;
 
-
     public Game() {
 
     }
@@ -29,32 +28,25 @@ public class Game {
         d.drawCards();
     }
 
-    public String checkWin(){
+    public String checkWin() {
         if (p.getGameHand().handValue() == 21 && p.getGameHand().getHand().size() == 2 && d.getGameHand().handValue() == 21 && d.getGameHand().getHand().size() != 2) {
-            p.setBudget(p.getBudget()+ p.getBet()*2.5);
+            p.setBudget(p.getBudget() + p.getBet() * 2.5);
             return "The Player won";
-        }
-        else if (p.getGameHand().handValue() == 21 && p.getGameHand().getHand().size() != 2 && d.getGameHand().handValue() == 21 && d.getGameHand().getHand().size() == 2) {
+        } else if (p.getGameHand().handValue() == 21 && p.getGameHand().getHand().size() != 2 && d.getGameHand().handValue() == 21 && d.getGameHand().getHand().size() == 2) {
             return "The Dealer won";
-        }
-        else if((p.getGameHand().handValue() > d.getGameHand().handValue() && p.getGameHand().handValue() <= 21) || (d.getGameHand().handValue() > 21 && p.getGameHand().handValue() <= 21)){
+        } else if ((p.getGameHand().handValue() > d.getGameHand().handValue() && p.getGameHand().handValue() <= 21) || (d.getGameHand().handValue() > 21 && p.getGameHand().handValue() <= 21)) {
             if (p.getGameHand().handValue() == 21 && p.getGameHand().getHand().size() == 2) {
-                p.setBudget(p.getBudget()+ p.getBet()*2.5);
+                p.setBudget(p.getBudget() + p.getBet() * 2.5);
             } else {
-                p.setBudget(p.getBudget()+ p.getBet()*2);
+                p.setBudget(p.getBudget() + p.getBet() * 2);
             }
             return "The Player won";
-        }
-        else if((p.getGameHand().handValue() < d.getGameHand().handValue() && d.getGameHand().handValue() <= 21) || (p.getGameHand().handValue() > 21 && d.getGameHand().handValue() <= 21)){
-
+        } else if ((p.getGameHand().handValue() < d.getGameHand().handValue() && d.getGameHand().handValue() <= 21) || (p.getGameHand().handValue() > 21 && d.getGameHand().handValue() <= 21)) {
             return "The Dealer won";
-        }
-        else if(p.getGameHand().getHand().size() == 7){
-
+        } else if (p.getGameHand().getHand().size() == 7) {
             return "The Player won";
-        }
-        else {
-            p.setBudget(p.getBudget()+ p.getBet());
+        } else {
+            p.setBudget(p.getBudget() + p.getBet());
             return "Draw";
         }
     }
@@ -67,9 +59,7 @@ public class Game {
         return p;
     }
 
-
     public Dealer getD() {
         return d;
     }
-
 }

@@ -1,9 +1,6 @@
 package at.ac.fhcampuswien;
 
-public class Player extends GamePerson{
-
-
-
+public class Player extends GamePerson {
 
     private double budget;
     private double bet = 10;

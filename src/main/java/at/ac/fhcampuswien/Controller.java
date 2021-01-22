@@ -90,14 +90,12 @@ public class Controller {
                 game.dealersTurn();
                 drawDealer();
                 winGame();
-            }
-            else if(game.getP().getGameHand().handValue() > 21){
+            } else if (game.getP().getGameHand().handValue() > 21) {
 
                 game.getD().getCard(game.getDeck());
                 drawDealer();
                 winGame();
-            }
-            else if(game.getP().getGameHand().getHand().size() == 7){
+            } else if (game.getP().getGameHand().getHand().size() == 7) {
                 game.getD().getCard(game.getDeck());
                 drawDealer();
                 winGame();
@@ -113,14 +111,13 @@ public class Controller {
                 endscreen();
             } else {
                 game.startGame();
-                try{
+                try {
                     InputStream stream = new FileInputStream("src/main/resources/Karten/CardSkin.png");
                     Image image = new Image(stream);
                     imgV_dealer2.setImage(image);
-                }catch (FileNotFoundException e){
+                } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }
-
 
                 game.getP().setBudget(game.getP().getBudget() - game.getP().getBet());
                 budget.setText("Budget: " + game.getP().getBudget());

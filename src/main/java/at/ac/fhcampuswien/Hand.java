@@ -11,11 +11,11 @@ public class Hand {
         hand = new ArrayList<>();
     }
 
-    public void addCard(Deck deck){
+    public void addCard(Deck deck) {
         hand.add(deck.hit());
     }
 
-    public int handValue(){
+    public int handValue() {
         int aces = 0;
         int sum = 0;
 

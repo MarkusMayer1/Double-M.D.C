@@ -8,9 +8,9 @@ public class Dealer extends GamePerson {
         this.deck = deck;
     }
 
-    public void drawCards(){
-       while (getGameHand().handValue() < 17){
-           getCard(deck);
-       }
-   }
+    public void drawCards() {
+        while (getGameHand().handValue() < 17) {
+            getCard(deck);
+        }
+    }
 }

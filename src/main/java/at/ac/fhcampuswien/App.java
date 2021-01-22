@@ -8,8 +8,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.*;
 
+import java.io.IOException;
+
 public class App extends Application {
-    public static void main(String[] args){
+
+    public static void main(String[] args) {
         launch(args);
     }
 
@@ -17,9 +20,14 @@ public class App extends Application {
     private double yOffset = 0;
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) {
         primaryStage.initStyle(StageStyle.UNDECORATED);
-        Parent root = FXMLLoader.load(this.getClass().getResource("/Table.fxml"));
+        Parent root = null;
+        try {
+            root = FXMLLoader.load(this.getClass().getResource("/Table.fxml"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         root.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
@@ -44,10 +52,5 @@ public class App extends Application {
         primaryStage.initStyle(StageStyle.TRANSPARENT);
         primaryStage.setResizable(false);
         primaryStage.show();
-
-
-
-
-
     }
 }
